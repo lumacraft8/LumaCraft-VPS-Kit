@@ -12,7 +12,7 @@ LumaCraft es un kit de herramientas profesional e interactivo diseñado para aut
  ██║      ██║   ██║██║╚██╔╝██║██╔══██║██║     ██╔══██╗██╔══██║██╔══╝     ██║   
  ███████╗ ╚██████╔╝██║ ╚═╝ ██║██║  ██║╚██████╗██║  ██║██║  ██║██║        ██║   
  ╚══════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝        ╚═╝   
-            • KIT PROFESIONAL PARA VPS • By SrxMateo •
+            • KIT PROFESIONAL PARA VPS • By SrxMateo & SonicTheGames•
 🚀 Instalación Instantánea
 Para instalar el comando de forma global en tu sistema y ejecutarlo desde cualquier lugar simplemente escribiendo l-kit, copia y pega este comando:
 
@@ -55,4 +55,4 @@ Para guías detalladas sobre configuración de Proxy (Velocity) o solución de p
 🤝 Contribuciones
 ¡Las sugerencias son bienvenidas! Si encuentras un error o quieres añadir un nuevo idioma, abre un Issue o envía un Pull Request.
 
-Desarrollado con ❤️ por SrxMateo.
+Desarrollado con ❤️ por SrxMateo & SonicTheGames.
