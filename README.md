@@ -8,4 +8,4 @@ wget [https://raw.githubusercontent.com/TU_USUARIO/LumaCraft-Kit/main/kit.sh](ht
 chmod +x l-kit
 sudo mv l-kit /usr/local/bin/
 l-kit
-By - SrxMateo & Sonicdegames
+By - SrxMateo & SonicTheGames
