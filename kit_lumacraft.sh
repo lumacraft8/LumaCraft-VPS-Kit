@@ -3,16 +3,15 @@
 # ======================================================
 # ██╗      ██╗   ██╗███╗   ███╗ █████╗  ██████╗██████╗  █████╗ ███████╗████████╗
 # ██║      ██║   ██║████╗ ████║██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔════╝╚══██╔══╝
-# ██║      ██║   ██║██╔████╔██║███████║██║     ██████╔╝███████║█████╗      ██║   
-# ██║      ██║   ██║██║╚██╔╝██║██╔══██║██║     ██╔══██╗██╔══██║██╔══╝      ██║   
-# ███████╗╚██████╔╝██║ ╚═╝ ██║██║  ██║╚██████╗██║  ██║██║  ██║██║        ██║   
-# ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝        ╚═╝   
-#
-#           🚀 INSTALADOR INTEGRAL LUMACRAFT 🚀
-#                By SrxMateo & Gemini AI
+# ██║      ██║   ██║██╔████╔██║███████║██║     ██████╔╝███████║█████╗     ██║   
+# ██║      ██║   ██║██║╚██╔╝██║██╔══██║██║     ██╔══██╗██╔══██║██╔══╝     ██║   
+# ███████╗ ╚██████╔╝██║ ╚═╝ ██║██║  ██║╚██████╗██║  ██║██║  ██║██║        ██║   
+# ╚══════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝        ╚═╝   
+#           🚀 LUMACRAFT MULTI-LANGUAGE KIT 🚀
+#                By SrxMateo
 # ======================================================
 
-# Colores y estilo
+# Colores
 GREEN="\033[1;32m"
 CYAN="\033[1;36m"
 YELLOW="\033[1;33m"
@@ -20,56 +19,70 @@ RED="\033[1;31m"
 WHITE="\033[1;37m"
 RESET="\033[0m"
 
-# Variables de seguimiento
-INST_JAVA="No"
-INST_TOOLS="No"
-INST_DB="No"
-INST_NET="No"
-INST_FW="No"
+# --- SELECCIÓN DE IDIOMA ---
+clear
+echo -e "${CYAN}======================================================"
+echo "    CHOOSE YOUR LANGUAGE / ELIGE TU IDIOMA"
+echo -e "======================================================${RESET}"
+echo "1) Español"
+echo "2) English"
+echo "3) Français"
+read -p "Select (1-3): " lang_choice
 
-# --- FUNCIÓN DE LOGO ---
+case $lang_choice in
+    1) # ESPAÑOL
+       T_WELCOME="BIENVENIDO AL INSTALADOR DE LUMACRAFT"
+       T_CLEAN="¿Quieres limpiar y actualizar la VPS?"; T_JAVA_TITLE="SELECCIÓN DE JAVA"
+       T_JAVA_OPT="Elija una opción (1-5):"; T_TOOLS="¿Instalar Screen, Btop y UFW?"
+       T_DB="¿Instalar MariaDB (MySQL)?"; T_NET="¿Crear carpetas y scripts de inicio?"
+       T_NET_NAME="Nombre de la carpeta principal:"; T_FW="¿Activar Firewall (Puertos 22 y 25565)?"
+       T_DONE="INSTALACIÓN COMPLETADA"; T_DESC="Resumen de acciones:"; S_YES="s";;
+    2) # ENGLISH
+       T_WELCOME="WELCOME TO LUMACRAFT INSTALLER"
+       T_CLEAN="Do you want to clean and update the VPS?"; T_JAVA_TITLE="JAVA SELECTION"
+       T_JAVA_OPT="Choose an option (1-5):"; T_TOOLS="Install Screen, Btop, and UFW?"
+       T_DB="Install MariaDB (MySQL)?"; T_NET="Create folders and start scripts?"
+       T_NET_NAME="Main folder name:"; T_FW="Enable Firewall (Ports 22 & 25565)?"
+       T_DONE="INSTALLATION COMPLETED"; T_DESC="Actions summary:"; S_YES="y";;
+    3) # FRANÇAIS
+       T_WELCOME="BIENVENUE DANS L'INSTALLATEUR LUMACRAFT"
+       T_CLEAN="Voulez-vous nettoyer et mettre à jour le VPS?"; T_JAVA_TITLE="SÉLECTION DE JAVA"
+       T_JAVA_OPT="Choisissez une option (1-5) :"; T_TOOLS="Installer Screen, Btop et UFW ?"
+       T_DB="Installer MariaDB (MySQL) ?"; T_NET="Créer des dossiers et scripts de démarrage ?"
+       T_NET_NAME="Nom du dossier principal :"; T_FW="Activer le Firewall (Ports 22 & 25565) ?"
+       T_DONE="INSTALLATION TERMINÉE"; T_DESC="Résumé des actions :"; S_YES="o";;
+    *) echo "Invalid choice"; exit 1;;
+esac
+
+# Variables de seguimiento
+INST_JAVA="No"; INST_TOOLS="No"; INST_DB="No"; INST_NET="No"; INST_FW="No"
+
+# --- FUNCIONES ---
 mostrar_logo() {
     clear
     echo -e "${CYAN}"
     echo " ██╗      ██╗   ██╗███╗   ███╗ █████╗  ██████╗██████╗  █████╗ ███████╗████████╗"
     echo " ██║      ██║   ██║████╗ ████║██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔════╝╚══██╔══╝"
-    echo " ██║      ██║   ██║██╔████╔██║███████║██║     ██████╔╝███████║█████╗      ██║   "
-    echo " ██║      ██║   ██║██║╚██╔╝██║██╔══██║██║     ██╔══██╗██╔══██║██╔══╝      ██║   "
-    echo " ███████╗╚██████╔╝██║ ╚═╝ ██║██║  ██║╚██████╗██║  ██║██║  ██║██║        ██║   "
-    echo " ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝        ╚═╝   "
-    echo -e "            ${WHITE}• KIT PROFESIONAL PARA VPS •${RESET}"
-    echo -e "==========================================================================${RESET}"
+    echo " ██║      ██║   ██║██╔████╔██║███████║██║     ██████╔╝███████║█████╗     ██║   "
+    echo " ██║      ██║   ██║██║╚██╔╝██║██╔══██║██║     ██╔══██╗██╔══██║██╔══╝     ██║   "
+    echo " ███████╗ ╚██████╔╝██║ ╚═╝ ██║██║  ██║╚██████╗██║  ██║██║  ██║██║        ██║   "
+    echo " ╚══════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝        ╚═╝   "
+    echo -e "            ${WHITE}• $T_WELCOME •${RESET}"
 }
 
-# Función de pregunta
 confirmar() {
-    read -p "$(echo -e "${YELLOW}❓ $1 (s/n): ${RESET}")" choice
-    case "$choice" in 
-      s|S|y|Y ) return 0;;
-      * ) return 1;;
-    esac
+    read -p "$(echo -e "${YELLOW}❓ $1 ($S_YES/n): ${RESET}")" choice
+    case "$choice" in $S_YES|${S_YES^^} ) return 0;; * ) return 1;; esac
 }
 
+# --- INICIO ---
 mostrar_logo
+if confirmar "$T_CLEAN"; then sudo apt update && sudo apt upgrade -y; fi
 
-# 1. Limpieza inicial
-if confirmar "¿Quieres limpiar y actualizar la VPS antes de empezar?"; then
-    echo -e "${GREEN}🔄 Limpiando software innecesario y actualizando...${RESET}"
-    sudo apt update && sudo apt upgrade -y
-    sudo apt autoremove -y &> /dev/null
-fi
-
-# 2. Selección de Java
-echo -e "\n${CYAN}☕ SELECCIÓN DE JAVA${RESET}"
-echo "1) Java 21 (Recomendado: 1.20.5+ y Velocity)"
-echo "2) Java 17 (Para 1.17 hasta 1.20.4)"
-echo "3) Java 8  (Para 1.8)"
-echo "4) Instalar TODOS (8, 17 y 21)"
-echo "5) Omitir"
-read -p "Opción (1-5): " j_choice
-
+echo -e "\n${CYAN}☕ $T_JAVA_TITLE${RESET}"
+echo "1) Java 21  2) Java 17  3) Java 8  4) ALL  5) Skip"
+read -p "$T_JAVA_OPT " j_choice
 if [ "$j_choice" -le 4 ]; then
-    echo -e "${GREEN}📥 Configurando repositorios de Java...${RESET}"
     wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | sudo apt-key add - &> /dev/null
     sudo add-apt-repository --yes https://packages.adoptium.net/artifactory/deb/ &> /dev/null
     sudo apt update &> /dev/null
@@ -77,74 +90,31 @@ if [ "$j_choice" -le 4 ]; then
         1) sudo apt install -y temurin-21-jdk; INST_JAVA="Java 21" ;;
         2) sudo apt install -y temurin-17-jdk; INST_JAVA="Java 17" ;;
         3) sudo apt install -y temurin-8-jdk; INST_JAVA="Java 8" ;;
-        4) sudo apt install -y temurin-8-jdk temurin-17-jdk temurin-21-jdk; INST_JAVA="8, 17 y 21" ;;
+        4) sudo apt install -y temurin-8-jdk temurin-17-jdk temurin-21-jdk; INST_JAVA="8, 17 & 21" ;;
     esac
 fi
 
-# 3. Herramientas y DB
-echo -e "\n${CYAN}🛠️ HERRAMIENTAS Y BASE DE DATOS${RESET}"
-if confirmar "¿Instalar herramientas de gestión (Screen, Btop, UFW)?"; then
-    sudo apt install -y screen btop ufw
-    INST_TOOLS="Screen, Btop y UFW"
-fi
+if confirmar "$T_TOOLS"; then sudo apt install -y screen btop ufw; INST_TOOLS="Yes"; fi
+if confirmar "$T_DB"; then sudo apt install -y mariadb-server; sudo systemctl start mariadb; INST_DB="Yes"; fi
 
-if confirmar "¿Instalar MariaDB (MySQL)?"; then
-    sudo apt install -y mariadb-server
-    sudo systemctl start mariadb
-    INST_DB="MariaDB (Instalada)"
-fi
-
-# 4. Estructura de Red y Scripts
-echo -e "\n${CYAN}📁 GESTIÓN DE ARCHIVOS${RESET}"
-if confirmar "¿Crear estructura de carpetas y scripts de inicio?"; then
-    read -p "Nombre de la carpeta de la Network: " n_dir
+if confirmar "$T_NET"; then
+    read -p "$T_NET_NAME " n_dir
     mkdir -p ~/$n_dir/{Proxy,Lobby,Survival}
-    
-    # Crear script de inicio base
-    cat <<EOT > ~/$n_dir/Lobby/iniciar.sh
-#!/bin/bash
-java -Xms1G -Xmx2G -jar server.jar nogui
-EOT
+    echo "java -Xmx2G -jar server.jar nogui" > ~/$n_dir/Lobby/iniciar.sh
     chmod +x ~/$n_dir/Lobby/iniciar.sh
-    INST_NET="~/$n_dir (Con scripts base)"
+    INST_NET="~/$n_dir"
 fi
 
-# 5. Firewall
-echo -e "\n${CYAN}🛡️ SEGURIDAD${RESET}"
-if confirmar "¿Activar Firewall (Puertos 22 y 25565)?"; then
-    sudo ufw default deny incoming
-    sudo ufw default allow outgoing
-    sudo ufw allow 22/tcp
-    sudo ufw allow 25565/tcp
-    echo "y" | sudo ufw enable
-    INST_FW="Protegido (SSH:22, MC:25565)"
+if confirmar "$T_FW"; then
+    sudo ufw allow 22/tcp && sudo ufw allow 25565/tcp
+    echo "y" | sudo ufw enable; INST_FW="Active (22, 25565)"
 fi
 
-# ======================================================
-# 🏁 EXPLICACIÓN FINAL Y RESUMEN
-# ======================================================
+# --- RESUMEN FINAL ---
 mostrar_logo
-echo -e "${GREEN}         ✅ INSTALACIÓN COMPLETADA CON ÉXITO"
-echo -e "==========================================================================${RESET}"
-echo -e "${WHITE}Resumen de configuración en esta VPS:${RESET}"
-echo ""
-echo -e "${CYAN}🔹 Java Instalado: ${YELLOW}$INST_JAVA${RESET}"
-echo -e "${CYAN}🔹 Utilidades:    ${YELLOW}$INST_TOOLS${RESET}"
-echo -e "${CYAN}🔹 Base de Datos: ${YELLOW}$INST_DB${RESET}"
-echo -e "${CYAN}🔹 Directorio:    ${YELLOW}$INST_NET${RESET}"
-echo -e "${CYAN}🔹 Seguridad:     ${YELLOW}$INST_FW${RESET}"
-echo ""
-echo -e "${WHITE}Explicación de acciones realizadas:${RESET}"
-
-if [ "$INST_FW" != "No" ]; then
-    echo "- Seguridad: Tu VPS ahora solo acepta tráfico por el puerto del Proxy (25565) y tu consola (22)."
-else
-    echo -e "- ${RED}¡ALERTA!: El Firewall está desactivado. Tu red es vulnerable.${RESET}"
-fi
-
-if [ "$INST_NET" != "No" ]; then
-    echo "- Archivos: Tienes la estructura lista. Se ha incluido un 'iniciar.sh' de ejemplo."
-fi
-
-echo -e "\n${YELLOW}👉 Próximos pasos: Sube tus .jar y usa 'screen -S nombre ./iniciar.sh'${RESET}"
-echo -e "${CYAN}==========================================================================${RESET}"
+echo -e "${GREEN}         ✅ $T_DONE"
+echo -e "======================================================${RESET}"
+echo -e "${WHITE}$T_DESC${RESET}"
+echo -e "${CYAN}🔹 Java:${RESET} $INST_JAVA | ${CYAN}🔹 Herramientas:${RESET} $INST_TOOLS"
+echo -e "${CYAN}🔹 DB:${RESET} $INST_DB | ${CYAN}🔹 Net:${RESET} $INST_NET | ${CYAN}🔹 Firewall:${RESET} $INST_FW"
+echo -e "\n${YELLOW}👉 Próximos pasos: l-kit (ejecución global)${RESET}"
